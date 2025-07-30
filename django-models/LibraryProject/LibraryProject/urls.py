@@ -1,3 +1,5 @@
+from django.urls import path, include
+
 """
 URL configuration for LibraryProject project.
 
@@ -19,4 +21,9 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('relationship_app.urls')),
 ]
+
+
+
+
