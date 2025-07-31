@@ -7,4 +7,5 @@ class BookAdmin(admin.ModelAdmin):
     list_filter = ('publication_year',)                    # Filter by publication year
 
 admin.site.register(Book, BookAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
 
