@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators
+from django.contrib.auth.decorators import permission_required
 import permission_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
