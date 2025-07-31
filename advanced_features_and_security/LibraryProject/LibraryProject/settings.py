@@ -158,3 +158,26 @@ CSP_SCRIPT_SRC = ("'self'", 'https://trusted.cdn.com')
 CSP_STYLE_SRC = ("'self'", 'https://trusted.cdn.com')
 CSP_FONT_SRC = ("'self'",)
 CSP_IMG_SRC = ("'self'",)
+
+# === HTTPS and SSL Security Settings ===
+
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True  # Mandatory for secure communication
+
+# HTTP Strict Transport Security (HSTS) for 1 year
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Ensure cookies are only sent over HTTPS
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Prevent clickjacking
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevent browser MIME-sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable browser XSS protection
+SECURE_BROWSER_XSS_FILTER = True
