@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators
+import permission_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -54,5 +56,19 @@ def librarian_view(request):
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
 
+@permission_required('relationship_app.can_add_book', raise_exception=True)
+def add_book(request):
+    # Your add book logic
+    pass
+
+@permission_required('relationship_app.can_change_book', raise_exception=True)
+def edit_book(request, pk):
+    # Your edit logic
+    pass
+
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
+def delete_book(request, pk):
+    # Your delete logic
+    pass
 
 
