@@ -9,7 +9,7 @@ def search_books(request):
     books = Book.objects.filter(title__icontains=query)
     return render(request, 'bookshelf/book_list.html', {'books': books})
 
-from .forms import SearchForm
+from .forms import ExampleForm
 
 def search_books(request):
     form = SearchForm(request.GET)
