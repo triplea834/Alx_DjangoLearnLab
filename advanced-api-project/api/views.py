@@ -3,7 +3,7 @@ from .models import Book
 from .serializers import BookSerializer
 
 # List & Create (GET / POST)
-class BookListCreateView(generics.ListCreateAPIView):
+class BookListView(generics.ListCreateAPIView):
     queryset = Book.objects.all().order_by('id')
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -12,7 +12,7 @@ class BookListCreateView(generics.ListCreateAPIView):
     ordering_fields = ['publication_year', 'title']
 
 # Retrieve / Update / Destroy (GET / PUT/PATCH / DELETE)
-class BookRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+class BookDetailViewUpdateViewDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
