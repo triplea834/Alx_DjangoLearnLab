@@ -12,7 +12,7 @@ class BookList(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filter_backends = [DjangoFilterBackend, SearchFilter, filters.OrderingFilter]
     # Simple exact filters (author expects id)
     filterset_fields = ['title', 'publication_year', 'author']
 
