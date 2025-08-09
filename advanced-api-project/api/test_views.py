@@ -33,7 +33,7 @@ class BookAPITestCase(APITestCase):
         return data
 
     def test_list_books_returns_200_and_correct_count(self):
-        resp = self.client.get(self.list_url)
+        resp = self.client.login(self.list_url)
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         results = self._results_from_response(resp)
         # should contain at least the two created books
