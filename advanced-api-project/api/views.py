@@ -1,22 +1,20 @@
-from rest_framework import generics, permissions, filters
+from rest_framework import generics
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Book
 from .serializers import BookSerializer
 
-# List & Create (GET / POST)
-class BookListCreateView(generics.ListCreateAPIView):
-    queryset = Book.objects.all().order_by('id')
-    serializer_class = BookSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['title', 'author__name']
-    ordering_fields = ['publication_year', 'title']
-
-# Retrieve / Update / Destroy (GET / PUT/PATCH / DELETE)
-class BookRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+class BookList(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    # Example customization: show who made it (if you had an owner field)
-    # def perform_update(self, serializer):
-    #     serializer.save(modified_by=self.request.user)
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    # Simple exact filters (author expects id)
+    filterset_fields = ['title', 'publication_year', 'author']
+
+    # Full-text search on title and author's name
+    search_fields = ['title', 'author__name']
+
+    # Allow ordering by title and publication_year
+    ordering_fields = ['title', 'publication_year']
+    ordering = ['title']  # default ordering
