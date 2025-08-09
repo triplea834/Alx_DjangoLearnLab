@@ -3,7 +3,7 @@ from .models import Book
 from .serializers import BookSerializer
 
 # List & Create (GET / POST)
-class BookListView(generics.ListCreateAPIView):
+class BookListViewCreateView(generics.ListCreateAPIView):
     queryset = Book.objects.all().order_by('id')
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
