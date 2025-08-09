@@ -27,7 +27,7 @@ class BookAPITestCase(APITestCase):
 
     def _results_from_response(self, resp):
         """Helper: return list of results whether paginated or not."""
-        data = resp.data
+        data = response.data
         if isinstance(data, dict) and "results" in data:
             return data["results"]
         return data
