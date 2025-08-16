@@ -20,7 +20,7 @@ class ProfileForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("title", "content")  # author is set in the view
+        fields = ("title", "content", "tags")  # author is set in the view
 
 class CommentForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea(attrs={"rows":3}), label="")

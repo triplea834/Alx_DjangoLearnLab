@@ -1,4 +1,15 @@
 <!-- inside the post detail template where you want comments displayed -->
+<h1>{{ object.title }}</h1>
+<p>{{ object.content|safe }}</p>
+
+<p>Tags:
+  {% for tag in object.tags.all %}
+    <a href="{% url 'posts-by-tag' tag.name %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+  {% empty %}
+    No tags
+  {% endfor %}
+</p>
+
 <section id="comments">
   <h3>Comments ({{ comments.count }})</h3>
 

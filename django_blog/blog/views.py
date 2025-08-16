@@ -2,6 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CommentCreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+
 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
@@ -105,5 +107,35 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.get_object().author == self.request.user  # only author can delete comment/<int:pk>/update/", "post/<int:pk>/comments/new/", "comment/<int:pk>/delete/
 
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView
+from .models import Post
+from django.db.models import Q
 
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 10
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/post_detail.html'
+
+def posts_by_tag(request, tag_name):
+    # Taggit: Post.objects.filter(tags__name__in=[tag_name])
+    posts = Post.objects.filter(tags__name__in=[tag_name])  # works for taggit and for manual Tag if .name field
+    return render(request, 'blog/posts_by_tag.html', {'posts': posts, 'tag': tag_name})
+
+def search_posts(request):
+    q = request.GET.get('q', '').strip()
+    posts = Post.objects.none()
+    if q:
+        # search title and content and tag names
+        posts = Post.objects.filter(
+            Q(title__icontains=q) |
+            Q(content__icontains=q) |
+            Q(tags__name__icontains=q)
+        ).distinct()
+    return render(request, 'blog/search_results.html', {'posts': posts, 'query': q})
 
