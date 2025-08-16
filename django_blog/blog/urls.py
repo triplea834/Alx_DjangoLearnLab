@@ -21,4 +21,4 @@ urlpatterns = [
     path('tags/<str:tag_name>/', posts_by_tag, name='posts-by-tag'),
     path('search/', search_posts, name='search'),
 ]
-# post/<int:pk>/delete/", "post/<int:pk>/update/", "post/new/ comment/<int:pk>/update/", "post/<int:pk>/comments/new/", "comment/<int:pk>/delete/
+# post/<int:pk>/delete/", "post/<int:pk>/update/", "post/new/ comment/<int:pk>/update/", "post/<int:pk>/comments/new/", "comment/<int:pk>/delete/ tags/<slug:tag_slug>/", "PostByTagListView.as_view()
