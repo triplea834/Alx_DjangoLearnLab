@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ view.object|default:'New Post' }}{% endblock %}
+
+{% block content %}
+<h1>{{ view.object|yesno:"Edit Post,New Post" }}</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+
+<p style="margin-top:1rem;"><a href="{% url 'posts' %}">Cancel</a></p>
+{% endblock %}
+
