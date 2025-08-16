@@ -103,7 +103,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy("posts")
 
     def test_func(self):
-        return self.get_object().author == self.request.user  # only author can delete
+        return self.get_object().author == self.request.user  # only author can delete comment/<int:pk>/update/", "post/<int:pk>/comments/new/", "comment/<int:pk>/delete/
 
 
 
